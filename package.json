@@ -1,35 +1,37 @@
 {
-    "name": "specials",
-    "version": "2.0.4",
-    "private": false,
-    "description": "A tool to manage general or special handle.",
-    "main": "lib/index.js",
-    "types": "lib/index.d.ts",
-    "scripts": {
-        "start": "tsc -w",
-        "build": "tsc",
-        "test": "jest"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/gaoxiaosong/specials.git"
-    },
-    "keywords": [
-        "General",
-        "Special",
-        "Handle"
-    ],
-    "author": "Xiaosong Gao",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/gaoxiaosong/specials/issues",
-        "email": "gaoxiaosong06@gmail.com"
-    },
-    "homepage": "https://github.com/gaoxiaosong/specials#readme",
-    "devDependencies": {
-        "@types/jest": "^24.0.6",
-        "jest": "^24.1.0",
-        "ts-jest": "^24.0.0",
-        "typescript": "^3.3.3"
-    }
+  "name": "specials",
+  "version": "2.0.4",
+  "private": false,
+  "description": "A tool to manage general or special handle.",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "start": "tsc -w",
+    "build": "tsc",
+    "test": "jest",
+    "patch": "npm version patch -m 'Bump version %s';git push origin master --tags",
+    "minor": "npm version minor -m 'Bump version %s';git push origin master --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaoxiaosong/specials.git"
+  },
+  "keywords": [
+    "General",
+    "Special",
+    "Handle"
+  ],
+  "author": "Xiaosong Gao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gaoxiaosong/specials/issues",
+    "email": "gaoxiaosong06@gmail.com"
+  },
+  "homepage": "https://github.com/gaoxiaosong/specials#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.6",
+    "jest": "^24.1.0",
+    "ts-jest": "^24.0.0",
+    "typescript": "^3.3.3"
+  }
 }
