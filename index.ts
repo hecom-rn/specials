@@ -15,10 +15,10 @@ export const PRIORITY = {
 
 export type PathKey = string | number | void | null;
 export type Path = PathKey | PathKey[];
-export type StateFunc<S> = (state?: S) => boolean;
-export type ResultFunc = () => any;
+export type StateFunc<S> = (state: S) => boolean;
+export type ResultFunc = (...args: any) => any;
 export type HandleResult<R> = R | ResultFunc | void;
-export type HandleFunc<P, R> = (params?: P) => HandleResult<R>;
+export type HandleFunc<P, R> = (params: P) => HandleResult<R>;
 export type HandleId = number;
 
 export interface Special<S, P, R> {
@@ -112,15 +112,17 @@ function get<S, P, R>(
         }
     }, obj);
     // Special Check
-    for (let i = items.length - 1; i >= 0; i--) {
-        const specs = items[i][SPECIAL_PART].filter(cur => cur[kSpecial](state));
-        if (specs.length > 0) {
-            const result = specs.reduce((prv, cur) => prv[kPriority] < cur[kPriority] ? cur : prv);
-            const handle = result[kHandle];
-            if (params && typeof handle === 'function') {
-                return handle(params);
-            } else {
-                return handle as ResultFunc;
+    if (state) {
+        for (let i = items.length - 1; i >= 0; i--) {
+            const specs = items[i][SPECIAL_PART].filter(cur => cur[kSpecial](state));
+            if (specs.length > 0) {
+                const result = specs.reduce((prv, cur) => prv[kPriority] < cur[kPriority] ? cur : prv);
+                const handle = result[kHandle];
+                if (params && typeof handle === 'function') {
+                    return handle(params);
+                } else {
+                    return handle as ResultFunc;
+                }
             }
         }
     }
