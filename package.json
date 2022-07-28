@@ -33,5 +33,9 @@
     "jest": "^24.1.0",
     "ts-jest": "^24.0.0",
     "typescript": "^3.3.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
