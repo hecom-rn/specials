@@ -10,13 +10,13 @@ A tool to manage general or special handle.
 Install by Yarn:
 
 ```shell
-yarn add specials
+yarn add @hecom/specials
 ```
 
 Install by NPM:
 
 ```shell
-npm install --save specials
+npm install --save @hecom/specials
 ```
 
 ## Usage
@@ -24,7 +24,7 @@ npm install --save specials
 Import the module in file:
 
 ```javascript
-import * as Specials from 'specials';
+import * as Specials from '@hecom/specials';
 ```
 
 ### Storage
