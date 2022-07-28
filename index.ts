@@ -58,8 +58,8 @@ export function getInstance<S, P, R>(): Instance<S, P, R> {
             root[SPECIAL_PART] = [];
             root[CHILD_PART] = {};
         },
-        get: function (path: Path, state?: S, params?: P) {
-            return get(root, path, state, params);
+        get: function (path: Path, state?: S, params?: P, specialOnly?: boolean) {
+            return get(root, path, state, params, specialOnly);
         },
         registerDefault: function (path: Path, handle: R | HandleFunc<P, R>) {
             return registerDefault(root, path, handle);
@@ -99,7 +99,8 @@ function get<S, P, R>(
     obj: Root<S, P, R>,
     path: Path,
     state?: S,
-    params?: P
+    params?: P,
+    specialOnly = false
 ): HandleResult<R> {
     const paths = validPath(path);
     const items = [obj];
@@ -127,14 +128,16 @@ function get<S, P, R>(
         }
     }
     // Regular Check
-    for (let i = items.length - 1; i >= 0; i--) {
-        const item = items[i][DEFAULT_HANDLE];
-        if (item) {
-            if (params && typeof item === 'function') {
-                const func = item as HandleFunc<P, R>;
-                return func(params);
-            } else {
-                return item as R;
+    if (!specialOnly) {
+        for (let i = items.length - 1; i >= 0; i--) {
+            const item = items[i][DEFAULT_HANDLE];
+            if (item) {
+                if (params && typeof item === 'function') {
+                    const func = item as HandleFunc<P, R>;
+                    return func(params);
+                } else {
+                    return item as R;
+                }
             }
         }
     }
