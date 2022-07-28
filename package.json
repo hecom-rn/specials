@@ -21,11 +21,11 @@
     "Special",
     "Handle"
   ],
-  "author": "Xiaosong Gao",
+  "author": "baiyudong",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/hecom-rn/specials/issues",
-    "email": "gaoxiaosong06@gmail.com"
+    "email": "baiyudong@hecom.cn"
   },
   "homepage": "https://github.com/hecom-rn/specials#readme",
   "devDependencies": {
