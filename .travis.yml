@@ -18,7 +18,7 @@ jobs:
       script: yarn run build
       deploy:
         provider: npm
-        email: gaoxiaosong06@gmail.com
+        email: baiyudong@hecom.cn
         api_key: "$NPM_TOKEN"
         skip_cleanup: true
         on:

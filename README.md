@@ -1,7 +1,7 @@
 # specials
 
-[![npm version](https://img.shields.io/npm/v/specials.svg?style=flat)](https://www.npmjs.com/package/specials)
-[![Build Status](https://travis-ci.org/gaoxiaosong/specials.svg?branch=master)](https://travis-ci.org/gaoxiaosong/specials)
+[![npm version](https://img.shields.io/npm/v/specials.svg?style=flat)](https://www.npmjs.com/package/@hecom/specials)
+[![Build Status](https://app.travis-ci.com/hecom-rn/specials.svg?branch=master)](https://app.travis-ci.com/hecom-rn/specials)
 
 A tool to manage general or special handle.
 

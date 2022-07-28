@@ -1,5 +1,5 @@
 {
-  "name": "specials",
+  "name": "@hecom/specials",
   "version": "2.0.6",
   "private": false,
   "description": "A tool to manage general or special handle.",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gaoxiaosong/specials.git"
+    "url": "git+https://github.com/hecom-rn/specials.git"
   },
   "keywords": [
     "General",
@@ -24,10 +24,10 @@
   "author": "Xiaosong Gao",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gaoxiaosong/specials/issues",
+    "url": "https://github.com/hecom-rn/specials/issues",
     "email": "gaoxiaosong06@gmail.com"
   },
-  "homepage": "https://github.com/gaoxiaosong/specials#readme",
+  "homepage": "https://github.com/hecom-rn/specials#readme",
   "devDependencies": {
     "@types/jest": "^24.0.6",
     "jest": "^24.1.0",
