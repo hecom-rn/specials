@@ -9,7 +9,7 @@ cache: yarn
 stages:
   - name: test
   - name: deploy
-    if: tag IS present
+    if: tag =~ ^v
 
 jobs:
   include:
