@@ -1,6 +1,6 @@
 {
   "name": "@hecom/specials",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "private": false,
   "description": "A tool to manage general or special handle.",
   "main": "lib/index.js",
