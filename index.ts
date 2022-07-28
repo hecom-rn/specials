@@ -41,7 +41,7 @@ export type Root<S, P, R> = Item<S, P, R>;
 export interface Instance<S, P, R> {
     getStorage: () => Root<S, P, R>;
     clearStorage: () => void;
-    get: (path: Path, state?: S, params?: P) => HandleResult<R>;
+    get: (path: Path, state?: S, params?: P, specialOnly?: boolean) => HandleResult<R>;
     registerDefault: (path: Path, handle: R | HandleFunc<P, R>) => void;
     registerSpecial: (path: Path, special: StateFunc<S>, handle: HandleFunc<P, R>, priority?: number) => HandleId;
     unregister: (path: Path, handleId?: HandleId) => boolean;
