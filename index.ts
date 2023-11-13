@@ -41,6 +41,7 @@ export type Root<S, P, R> = Item<S, P, R>;
 export interface Instance<S, P, R> {
     getStorage: () => Root<S, P, R>;
     clearStorage: () => void;
+    checkIsDefault: (path: Path, state?: S, params?: P) => boolean;
     get: (path: Path, state?: S, params?: P) => HandleResult<R>;
     registerDefault: (path: Path, handle: R | HandleFunc<P, R>) => void;
     registerSpecial: (path: Path, special: StateFunc<S>, handle: HandleFunc<P, R>, priority?: number) => HandleId;
@@ -58,8 +59,11 @@ export function getInstance<S, P, R>(): Instance<S, P, R> {
             root[SPECIAL_PART] = [];
             root[CHILD_PART] = {};
         },
+        checkIsDefault: function (path: Path, state?: S, params?: P) {
+            return checkIsDefault(root, path, state, params);
+        },
         get: function (path: Path, state?: S, params?: P) {
-            return get(root, path, state, params);
+            return get(root, path, state, params) as HandleResult<R>;
         },
         registerDefault: function (path: Path, handle: R | HandleFunc<P, R>) {
             return registerDefault(root, path, handle);
@@ -99,8 +103,9 @@ function get<S, P, R>(
     obj: Root<S, P, R>,
     path: Path,
     state?: S,
-    params?: P
-): HandleResult<R> {
+    params?: P,
+    onlyCheckDefault = false
+): HandleResult<R> | boolean {
     const paths = validPath(path);
     const items = [obj];
     paths.reduce((prv, cur) => {
@@ -115,14 +120,21 @@ function get<S, P, R>(
     for (let i = items.length - 1; i >= 0; i--) {
         const specs = items[i][SPECIAL_PART].filter(cur => cur[kSpecial](state));
         if (specs.length > 0) {
-            const result = specs.reduce((prv, cur) => prv[kPriority] < cur[kPriority] ? cur : prv);
-            const handle = result[kHandle];
-            if (params && typeof handle === 'function') {
-                return handle(params);
+            if (onlyCheckDefault) {
+                return false;
             } else {
-                return handle as ResultFunc;
+                const result = specs.reduce((prv, cur) => prv[kPriority] < cur[kPriority] ? cur : prv);
+                const handle = result[kHandle];
+                if (params && typeof handle === 'function') {
+                    return handle(params);
+                } else {
+                    return handle as ResultFunc;
+                }
             }
         }
+    }
+    if (onlyCheckDefault) {
+        return true;
     }
     // Regular Check
     for (let i = items.length - 1; i >= 0; i--) {
@@ -136,6 +148,15 @@ function get<S, P, R>(
             }
         }
     }
+}
+
+function checkIsDefault<S, P, R>(
+    obj: Root<S, P, R>,
+    path: Path,
+    state?: S,
+    params?: P
+): boolean {
+    return get(obj, path, state, params, true) as boolean;
 }
 
 /**
